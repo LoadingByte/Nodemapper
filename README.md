@@ -17,7 +17,6 @@ We use maven to handle our dependencies and build. To compile Nodemapper, follow
 
 * Install [Maven 3](http://maven.apache.org/download.html).
 * Check out this repository (clone or download).
-* Download the [TWL-Library](http://twl.l33tlabs.org/demo/twl.zip) and unzip the package.
 * Navigate to the project folder of this repository which contains a `pom.xml` and run:
 
         $ mvn clean install
