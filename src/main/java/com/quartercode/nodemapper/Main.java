@@ -43,10 +43,6 @@ import com.quartercode.nodemapper.util.OSUtil;
 
 public class Main {
 
-    public static String               NAME      = "Nodemapper";
-    public static String               CREATOR   = "QuarterCode";
-    public static String               VERSION   = "1.1";
-
     private static File                dir;
     private static MainFrame           mainFrame;
     private static List<LastFileEntry> lastFiles = new ArrayList<LastFileEntry>();
@@ -91,6 +87,21 @@ public class Main {
                 }
             }
         });
+    }
+
+    public static String getTitle() {
+
+        return Main.class.getPackage().getImplementationTitle();
+    }
+
+    public static String getVersion() {
+
+        return Main.class.getPackage().getImplementationVersion();
+    }
+
+    public static String getVendor() {
+
+        return Main.class.getPackage().getImplementationVendor();
     }
 
     public static File getDir() {

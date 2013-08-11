@@ -39,7 +39,7 @@ public class AboutDialog extends JDialog {
 
         super(parent);
 
-        setTitle("About " + Main.NAME);
+        setTitle("About " + Main.getTitle());
         setModal(true);
         setResizable(false);
         setBounds(0, 0, 450, 150);
@@ -49,15 +49,15 @@ public class AboutDialog extends JDialog {
         contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         getContentPane().add(contentPanel);
 
-        JLabel nameLabel = new JLabel("Product: " + Main.NAME);
+        JLabel nameLabel = new JLabel("Product: " + Main.getTitle());
         nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
         contentPanel.add(nameLabel);
 
-        JLabel creatorLabel = new JLabel("Creator: " + Main.CREATOR);
+        JLabel creatorLabel = new JLabel("Vendor: " + Main.getVendor());
         creatorLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
         contentPanel.add(creatorLabel);
 
-        JLabel versionLabel = new JLabel("Version: " + Main.VERSION);
+        JLabel versionLabel = new JLabel("Version: " + Main.getVersion());
         versionLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
         contentPanel.add(versionLabel);
 

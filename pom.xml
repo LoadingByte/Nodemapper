@@ -4,7 +4,7 @@
 
     <groupId>com.quartercode.nodemapper</groupId>
     <artifactId>nodemapper</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <name>Nodemapper</name>
@@ -22,15 +22,6 @@
         <main.class>com.quartercode.nodemapper.Main</main.class>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-    
     <build>
         <plugins>
             <!-- License header -->
@@ -72,7 +63,7 @@
                 </executions>
             </plugin>
 
-            <!-- Compile project classes -->
+            <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -94,7 +85,7 @@
                             <mainClass>${main.class}</mainClass>
                         </manifest>
                         <manifestEntries>
-                            <Implementation-Title>${project.artifactId}</Implementation-Title>
+                            <Implementation-Title>${project.name}</Implementation-Title>
                             <Implementation-Version>${project.version}</Implementation-Version>
                             <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
                         </manifestEntries>

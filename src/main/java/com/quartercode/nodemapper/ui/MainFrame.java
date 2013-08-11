@@ -309,7 +309,7 @@ public class MainFrame extends JFrame {
 
     private void refreshTitle() {
 
-        setTitle(Main.NAME + " " + Main.VERSION + " - by " + Main.CREATOR + " - " + (nodePanel.getTree() == null ? "No Document" : nodePanel.getTree().getName() + (nodePanel.isChanged() ? " *" : "")));
+        setTitle(Main.getTitle() + " " + Main.getVersion() + " - by " + Main.getVendor() + " - " + (nodePanel.getTree() == null ? "No Document" : nodePanel.getTree().getName() + (nodePanel.isChanged() ? " *" : "")));
     }
 
     public void setTree(Tree tree) {
