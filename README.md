@@ -1,6 +1,8 @@
 Nodemapper
 ==========
 
+![Nodemapper Screenshot](https://raw.github.com/QuarterCode/Nodemapper/master/doc/screenshots/screenshot1.png)
+
 Nodemapper is a 2D tree mapping application. It's a powerful tool for creating trees using a GUI software.
 
 License
