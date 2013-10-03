@@ -24,7 +24,6 @@ import java.awt.Graphics2D;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -49,7 +48,7 @@ public class NodePanel extends JPanel {
     private StateManager         stateManager;
     private boolean              changed;
 
-    private Point                view;
+    private Point                viewPoint;
     private final List<Runnable> changeListeners = new ArrayList<Runnable>();
 
     private RenderNode           dragNode;
@@ -113,8 +112,9 @@ public class NodePanel extends JPanel {
                             Node end = getNodeComplete(createEnd, true);
                             if (end == null) {
                                 end = new Node();
-                                end.addProperty(new NodeProperty("x", String.valueOf(createEnd.x + view.x)));
-                                end.addProperty(new NodeProperty("y", String.valueOf(createEnd.y + view.y)));
+                                Point endPoint = convertPointRelToAbs(createEnd);
+                                end.addProperty(new NodeProperty("x", String.valueOf(endPoint.x)));
+                                end.addProperty(new NodeProperty("y", String.valueOf(endPoint.y)));
                                 TreeUtil.addNode(tree, end, start);
                                 editNode = new RenderNode(tree, end);
                                 editCursor = 0;
@@ -160,8 +160,9 @@ public class NodePanel extends JPanel {
 
                 if (tree != null) {
                     if (dragNode != null) {
-                        dragNode.getNode().getProperty("x").setValue(String.valueOf(e.getX() + view.x));
-                        dragNode.getNode().getProperty("y").setValue(String.valueOf(e.getY() + view.y));
+                        Point dragPoint = convertPointRelToAbs(e.getPoint());
+                        dragNode.getNode().getProperty("x").setValue(String.valueOf(dragPoint.x));
+                        dragNode.getNode().getProperty("y").setValue(String.valueOf(dragPoint.y));
                         dragNodeDragged = true;
                         repaint();
                     } else if (createStart != null) {
@@ -169,7 +170,7 @@ public class NodePanel extends JPanel {
                         repaint();
                     } else if (dragView != null) {
                         int multiplier = e.isShiftDown() ? 2 : 1;
-                        view = new Point(view.x + (dragView.x - e.getX()) * multiplier, view.y + (dragView.y - e.getY()) * multiplier);
+                        viewPoint = new Point(viewPoint.x + (dragView.x - e.getX()) * multiplier, viewPoint.y + (dragView.y - e.getY()) * multiplier);
                         dragView = e.getPoint();
                         repaint();
                     }
@@ -272,14 +273,19 @@ public class NodePanel extends JPanel {
         }
     }
 
-    public Point getView() {
+    public Point getViewPoint() {
 
-        return view;
+        return viewPoint;
     }
 
-    public Rectangle getViewport() {
+    public Point convertPointRelToAbs(Point relativePoint) {
 
-        return new Rectangle(getView(), getSize());
+        return new Point(relativePoint.x + viewPoint.x, relativePoint.y + viewPoint.y);
+    }
+
+    public Point convertPointAbsToRel(Point relativePoint) {
+
+        return new Point(relativePoint.x - viewPoint.x, relativePoint.y - viewPoint.y);
     }
 
     public void addChangeListener(Runnable listener) {
@@ -294,7 +300,7 @@ public class NodePanel extends JPanel {
 
     public RenderNode getRenderNode(Node node) {
 
-        return new RenderNode(tree, node, getScreenLocation(node), editNode != null && node.equals(editNode.getNode()) ? editCursor : -1);
+        return new RenderNode(tree, node, convertPointAbsToRel(getLocation(node)), editNode != null && node.equals(editNode.getNode()) ? editCursor : -1);
     }
 
     public Point getLocation(Node node) {
@@ -303,11 +309,6 @@ public class NodePanel extends JPanel {
         int y = node.getProperty("y") == null ? 0 : Integer.parseInt(node.getProperty("y").getValue());
 
         return new Point(x, y);
-    }
-
-    public Point getScreenLocation(Node node) {
-
-        return new Point(getLocation(node).x - view.x, getLocation(node).y - view.y);
     }
 
     public Node getNodeInner(Point location, boolean acceptRoot) {
@@ -340,19 +341,19 @@ public class NodePanel extends JPanel {
 
     public void resetView() {
 
-        view = new Point(- (getParent().getWidth() / 2), -150);
+        viewPoint = new Point(- (getParent().getWidth() / 2), -150);
         repaint();
     }
 
     @Override
     public void paint(Graphics g) {
 
-        if (view == null) {
+        if (viewPoint == null) {
             resetView();
         }
 
         ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        renderer.drawViewport((Graphics2D) g, getBounds(), view);
+        renderer.drawViewport((Graphics2D) g, getBounds(), viewPoint);
         if (tree != null) {
             paintLinks(g);
             paintNodes(g);
