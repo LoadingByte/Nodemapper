@@ -50,7 +50,7 @@ public class Main {
     @SuppressWarnings ("unchecked")
     public static void main(String[] args) {
 
-        dir = new File(OSUtil.getDataDir(), "QuarterCode/Nodemapper");
+        dir = new File(OSUtil.getDataDir(), ".nodemapper");
         dir.mkdirs();
 
         InternalReferenceSerializer.register();
