@@ -20,13 +20,10 @@ package com.quartercode.nodemapper.ser.types;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.bind.JAXB;
 import com.quartercode.nodemapper.gr.RenderNode;
@@ -53,7 +50,7 @@ public class DialogueSerializer extends ReferenceSerializer {
     @Override
     public void serialize(Tree tree, Output output) throws IOException {
 
-        Map<Integer, String> contents = new HashMap<Integer, String>();
+        Map<Integer, String> contents = new TreeMap<Integer, String>();
         Map<String, DialogueCharacter> characters = new HashMap<String, DialogueCharacter>();
         for (Node node : tree.getNodes()) {
             node.removeProperty(node.getProperty("x"));
@@ -68,26 +65,19 @@ public class DialogueSerializer extends ReferenceSerializer {
                     if (!executor.equals("player") && !characters.containsKey(executor)) {
                         characters.put(executor, new DialogueCharacter(executor, executor));
                     }
+                    contents.put(renderNode.getNode().getId(), renderNode.getContent().substring(header.length() + 1));
                 } else if (header.startsWith("$")) {
                     String type = header.substring(1);
                     node.addProperty(new NodeProperty(type, renderNode.getContentLines()[1]));
                 }
-                contents.put(renderNode.getNode().getId(), renderNode.getContent().substring(header.length() + 1));
                 renderNode.setContent("");
             }
         }
 
         super.serialize(tree, output);
 
-        List<Integer> sortedIds = new ArrayList<Integer>(contents.keySet());
-        Collections.sort(sortedIds);
-        Map<Integer, String> sortedContents = new LinkedHashMap<Integer, String>();
-        for (int id : sortedIds) {
-            sortedContents.put(id, contents.get(id));
-        }
-
         PrintStream valueOutput = new PrintStream(output.getOutputStream("_values.lang", false));
-        for (Entry<Integer, String> entry : sortedContents.entrySet()) {
+        for (Entry<Integer, String> entry : contents.entrySet()) {
             valueOutput.println(entry.getKey() + "=" + entry.getValue().replaceAll("\\\\", " "));
         }
         valueOutput.close();
