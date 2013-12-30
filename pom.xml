@@ -12,15 +12,44 @@
     <description>Nodemapper is a 2D tree mapping application.</description>
     <inceptionYear>2013</inceptionYear>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <main.class>com.quartercode.nodemapper.Main</main.class>
+    </properties>
+
     <organization>
         <name>QuarterCode</name>
         <url>http://www.quartercode.com</url>
     </organization>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <main.class>com.quartercode.nodemapper.Main</main.class>
-    </properties>
+    <developers>
+        <developer>
+            <name>LoadingByte</name>
+            <id>loadingbyte</id>
+            <email>loadingbyte@gmail.com</email>
+            <organization>QuarterCode</organization>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License Version 3</name>
+            <url>http://opensource.org/licenses/GPL-3.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/QuarterCode/Nodemapper/tree/master/</url>
+        <connection>scm:git:git://github.com/QuarterCode/Nodemapper.git</connection>
+        <developerConnection>scm:git:git@github.com:QuarterCode/Nodemapper.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/QuarterCode/Nodemapper/issues</url>
+    </issueManagement>
 
     <build>
         <plugins>
