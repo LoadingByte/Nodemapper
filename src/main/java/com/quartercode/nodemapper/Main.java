@@ -47,7 +47,6 @@ public class Main {
     private static MainFrame           mainFrame;
     private static List<LastFileEntry> lastFiles = new ArrayList<LastFileEntry>();
 
-    @SuppressWarnings ("unchecked")
     public static void main(String[] args) {
 
         dir = new File(OSUtil.getDataDir(), ".nodemapper");
@@ -60,8 +59,15 @@ public class Main {
         try {
             for (Entry<File, String> entry : LastFilesSerializer.load(new File(dir, "last.txt")).entrySet()) {
                 if (entry.getKey().exists()) {
+                    // If the given class happens not to be a serializer class, the check afterwards will catch the error
+                    @SuppressWarnings ("unchecked")
                     Class<? extends Serializer> serializer = (Class<? extends Serializer>) Class.forName(entry.getValue());
-                    lastFiles.add(new LastFileEntry(entry.getKey(), serializer, FileActionUtil.loadTree(entry.getKey(), SerializerManager.getSerializer(serializer))));
+                    if (!Serializer.class.isAssignableFrom(serializer)) {
+                        // Ignore entries with wrong serializers
+                        continue;
+                    } else {
+                        lastFiles.add(new LastFileEntry(entry.getKey(), serializer, FileActionUtil.loadTree(entry.getKey(), SerializerManager.getSerializer(serializer))));
+                    }
                 }
             }
         }
