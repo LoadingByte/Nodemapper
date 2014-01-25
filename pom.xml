@@ -40,10 +40,9 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/QuarterCode/Nodemapper/tree/master/</url>
+        <url>https://github.com/QuarterCode/Nodemapper</url>
         <connection>scm:git:git://github.com/QuarterCode/Nodemapper.git</connection>
         <developerConnection>scm:git:git@github.com:QuarterCode/Nodemapper.git</developerConnection>
-        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
