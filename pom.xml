@@ -4,7 +4,7 @@
 
     <groupId>com.quartercode</groupId>
     <artifactId>nodemapper</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <packaging>jar</packaging>
 
     <name>Nodemapper</name>
@@ -34,8 +34,7 @@
     <licenses>
         <license>
             <name>GNU General Public License Version 3</name>
-            <url>http://opensource.org/licenses/GPL-3.0</url>
-            <distribution>repo</distribution>
+            <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
         </license>
     </licenses>
 
@@ -50,6 +49,22 @@
         <system>GitHub Issues</system>
         <url>https://github.com/QuarterCode/Nodemapper/issues</url>
     </issueManagement>
+
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>http://ci.quartercode.com</url>
+    </ciManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>quartercode-deployment</id>
+            <url>http://repo.quartercode.com/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>quartercode-deployment</id>
+            <url>http://repo.quartercode.com/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <plugins>
