@@ -70,8 +70,7 @@ public class Main {
                     }
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             handle(e);
         }
 
@@ -87,8 +86,7 @@ public class Main {
                     mainFrame.getNodePanel().setRenderer(new DarkRenderer());
                     mainFrame.setVisible(true);
                     new LastFilesDialog(mainFrame).setVisible(true);
-                }
-                catch (Throwable t) {
+                } catch (Throwable t) {
                     handle(t);
                 }
             }
@@ -150,8 +148,7 @@ public class Main {
                 data.put(entry.getFile(), entry.getSerializer().getName());
             }
             LastFilesSerializer.save(data, new File(dir, "last.txt"));
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             handle(e);
         }
     }
@@ -166,8 +163,7 @@ public class Main {
                 data.put(entry.getFile(), entry.getSerializer().getName());
             }
             LastFilesSerializer.save(data, new File(dir, "last.txt"));
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             handle(e);
         }
     }

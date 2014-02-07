@@ -36,15 +36,12 @@ public class FileActionUtil {
         Input input = new FileInput(file);
         try {
             return serializer.deserialize(input);
-        }
-        catch (IOException e1) {
+        } catch (IOException e1) {
             Main.handle(e1);
-        }
-        finally {
+        } finally {
             try {
                 input.close();
-            }
-            catch (IOException e1) {
+            } catch (IOException e1) {
                 Main.handle(e1);
             }
         }

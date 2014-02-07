@@ -399,15 +399,12 @@ public class MainFrame extends JFrame {
             if (serializer.getClass().isAnnotationPresent(InternalSerializer.class)) {
                 Main.addLastFile(file, serializer, nodePanel.getTree());
             }
-        }
-        catch (Throwable e) {
+        } catch (Throwable e) {
             Main.handle(e);
-        }
-        finally {
+        } finally {
             try {
                 output.close();
-            }
-            catch (IOException e1) {
+            } catch (IOException e1) {
                 Main.handle(e1);
             }
         }
