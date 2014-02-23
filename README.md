@@ -29,12 +29,12 @@ Run
 
 If you downloaded a binaries package or built your own one, you have several options to run Nodemapper:
 
-* You can try to execute nodemapper-<version>.jar (e.g. with a double-click).
+* You can try to execute `nodemapper-<version>.jar` (e.g. with a double-click).
 * If that doesn't work, open a command prompt, navigate to the binaries folder and run:
 
         $ java -jar nodemapper-<version>.jar
 
-You need the Java JRE for every of those methods. If you haven't done yet, download it [here](www.java.com/download).
+You need the Java JRE for each of those methods. If you haven't done yet, download it [here](www.java.com/download).
 
 Usage
 -----
