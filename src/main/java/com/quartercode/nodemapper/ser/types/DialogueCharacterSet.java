@@ -38,7 +38,7 @@ public class DialogueCharacterSet {
 
     public void setCharacters(DialogueCharacter[] characters) {
 
-        this.characters = characters;
+        this.characters = characters.clone();
     }
 
 }

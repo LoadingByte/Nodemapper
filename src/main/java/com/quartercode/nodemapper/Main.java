@@ -79,16 +79,10 @@ public class Main {
             @Override
             public void run() {
 
-                try {
-                    // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-                    mainFrame = new MainFrame();
-                    mainFrame.getNodePanel().setRenderer(new DarkRenderer());
-                    mainFrame.setVisible(true);
-                    new LastFilesDialog(mainFrame).setVisible(true);
-                } catch (Throwable t) {
-                    handle(t);
-                }
+                mainFrame = new MainFrame();
+                mainFrame.getNodePanel().setRenderer(new DarkRenderer());
+                mainFrame.setVisible(true);
+                new LastFilesDialog(mainFrame).setVisible(true);
             }
         });
     }
