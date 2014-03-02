@@ -21,7 +21,7 @@ package com.quartercode.nodemapper.tree;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
-public class NodeProperty {
+public class NodeProperty implements Cloneable {
 
     private String name;
     private String value;

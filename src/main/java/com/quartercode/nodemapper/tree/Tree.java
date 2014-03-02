@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class Tree {
+public class Tree implements Cloneable {
 
     private String           name;
     private final List<Node> nodes = new ArrayList<Node>();
