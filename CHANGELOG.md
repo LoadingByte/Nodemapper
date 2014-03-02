@@ -7,6 +7,7 @@
 
 ### Fixes
 * Refactored a whole bunch of code based on automatic suggestions.
+* Maven will publish the sources from this version onwards.
 
 1.1.2
 -----
