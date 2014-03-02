@@ -1,6 +1,10 @@
 1.2.0
 -----
 
+### Additions
+* Moved the working directory to the user's home dir.
+* Added a logging system which prints out log messages into a log file.
+
 ### Fixes
 * Refactored a whole bunch of code based on automatic suggestions.
 
