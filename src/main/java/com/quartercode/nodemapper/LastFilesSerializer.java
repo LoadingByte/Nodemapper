@@ -101,4 +101,8 @@ public class LastFilesSerializer {
         return lastFiles;
     }
 
+    private LastFilesSerializer() {
+
+    }
+
 }

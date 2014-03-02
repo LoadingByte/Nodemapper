@@ -120,7 +120,7 @@ public class LastFilesDialog extends JDialog {
             lastFilesModel.addElement(Main.getLastFiles().get(counter));
         }
 
-        if (lastFilesModel.size() <= 0) {
+        if (lastFilesModel.isEmpty()) {
             lastFilesModel.addElement("No recent Maps");
         }
     }

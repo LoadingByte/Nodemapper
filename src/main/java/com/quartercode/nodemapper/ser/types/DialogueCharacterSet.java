@@ -33,7 +33,7 @@ public class DialogueCharacterSet {
     @XmlElement (name = "character")
     public DialogueCharacter[] getCharacters() {
 
-        return characters;
+        return characters.clone();
     }
 
     public void setCharacters(DialogueCharacter[] characters) {
