@@ -27,6 +27,8 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
@@ -49,18 +51,16 @@ import com.quartercode.nodemapper.tree.TreeUtil;
 @SuppressWarnings ("serial")
 public class MainFrame extends JFrame {
 
-    private JMenuBar        menuBar;
-    private JMenu           fileMenu;
-    private Action          saveAction;
-    private Action          saveAsAction;
-    private Action          exportAsAction;
-    private JMenu           editMenu;
-    private Action          renameAction;
-    private JMenu           helpMenu;
-    private final NodePanel nodePanel;
+    private static final Logger LOGGER = Logger.getLogger(MainFrame.class.getName());
 
-    private File            currentFile;
-    private File            lastDirectory;
+    private Action              saveAction;
+    private Action              saveAsAction;
+    private Action              exportAsAction;
+    private Action              renameAction;
+    private final NodePanel     nodePanel;
+
+    private File                currentFile;
+    private File                lastDirectory;
 
     public MainFrame() {
 
@@ -99,10 +99,10 @@ public class MainFrame extends JFrame {
 
     private void initalizeMenu() {
 
-        menuBar = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
-        fileMenu = new JMenu("File");
+        JMenu fileMenu = new JMenu("File");
         menuBar.add(fileMenu);
 
         fileMenu.add(new JMenuItem(new AbstractAction("Recent Maps...") {
@@ -213,7 +213,7 @@ public class MainFrame extends JFrame {
         };
         fileMenu.add(exportAsAction);
 
-        editMenu = new JMenu("Edit");
+        JMenu editMenu = new JMenu("Edit");
         menuBar.add(editMenu);
 
         final AbstractAction undoAction = new AbstractAction("Undo") {
@@ -294,7 +294,7 @@ public class MainFrame extends JFrame {
         };
         editMenu.add(renameAction);
 
-        helpMenu = new JMenu("Help");
+        JMenu helpMenu = new JMenu("Help");
         menuBar.add(helpMenu);
 
         helpMenu.add(new JMenuItem(new AbstractAction("About...") {
@@ -399,16 +399,13 @@ public class MainFrame extends JFrame {
             if (serializer.getClass().isAnnotationPresent(InternalSerializer.class)) {
                 Main.addLastFile(file, serializer, nodePanel.getTree());
             }
-        }
-        catch (Throwable e) {
-            Main.handle(e);
-        }
-        finally {
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Can't serialize tree to '" + file.getAbsolutePath() + "'", e);
+        } finally {
             try {
                 output.close();
-            }
-            catch (IOException e1) {
-                Main.handle(e1);
+            } catch (IOException e) {
+                LOGGER.log(Level.SEVERE, "Can't close output (file '" + file.getAbsolutePath() + "')", e);
             }
         }
     }

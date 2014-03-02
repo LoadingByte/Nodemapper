@@ -105,36 +105,34 @@ public class NodePanel extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
 
-                if (tree != null) {
-                    if (createEnd != null) {
-                        Node start = getNodeComplete(createStart, true);
-                        if (start != null) {
-                            Node end = getNodeComplete(createEnd, true);
-                            if (end == null) {
-                                end = new Node();
-                                Point endPoint = convertPointRelToAbs(createEnd);
-                                end.addProperty(new NodeProperty("x", String.valueOf(endPoint.x)));
-                                end.addProperty(new NodeProperty("y", String.valueOf(endPoint.y)));
-                                TreeUtil.addNode(tree, end, start);
-                                editNode = new RenderNode(tree, end);
-                                editCursor = 0;
+                if (tree != null && createEnd != null) {
+                    Node start = getNodeComplete(createStart, true);
+                    if (start != null) {
+                        Node end = getNodeComplete(createEnd, true);
+                        if (end == null) {
+                            end = new Node();
+                            Point endPoint = convertPointRelToAbs(createEnd);
+                            end.addProperty(new NodeProperty("x", String.valueOf(endPoint.x)));
+                            end.addProperty(new NodeProperty("y", String.valueOf(endPoint.y)));
+                            TreeUtil.addNode(tree, end, start);
+                            editNode = new RenderNode(tree, end);
+                            editCursor = 0;
+                        } else {
+                            if (start.getChildren().contains(end)) {
+                                start.removeChild(end);
+                            } else if (end.getChildren().contains(start)) {
+                                end.removeChild(start);
                             } else {
-                                if (start.getChildren().contains(end)) {
-                                    start.removeChild(end);
-                                } else if (end.getChildren().contains(start)) {
-                                    end.removeChild(start);
-                                } else {
-                                    start.addChild(end);
-                                }
+                                start.addChild(end);
                             }
-
-                            TreeUtil.cleanupNodes(tree);
-                            onChange();
                         }
-                    }
 
-                    release();
+                        TreeUtil.cleanupNodes(tree);
+                        onChange();
+                    }
                 }
+
+                release();
             }
 
             private void release() {

@@ -44,7 +44,6 @@ import com.quartercode.nodemapper.tree.Tree;
 @SuppressWarnings ("serial")
 public class LastFilesDialog extends JDialog {
 
-    private final JPanel           contentPanel;
     private final JList            lastFilesList;
     private final DefaultListModel lastFilesModel;
 
@@ -57,7 +56,7 @@ public class LastFilesDialog extends JDialog {
         setBounds(0, 0, 500, 300);
         setLocation(getParent().getX() + getParent().getWidth() / 2 - getWidth() / 2, getParent().getY() + getParent().getHeight() / 2 - getHeight() / 2);
 
-        contentPanel = new JPanel(new BorderLayout(0, 15));
+        JPanel contentPanel = new JPanel(new BorderLayout(0, 15));
         contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         getContentPane().add(contentPanel);
 
@@ -121,7 +120,7 @@ public class LastFilesDialog extends JDialog {
             lastFilesModel.addElement(Main.getLastFiles().get(counter));
         }
 
-        if (lastFilesModel.size() <= 0) {
+        if (lastFilesModel.isEmpty()) {
             lastFilesModel.addElement("No recent Maps");
         }
     }

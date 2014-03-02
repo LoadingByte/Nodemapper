@@ -33,8 +33,6 @@ import com.quartercode.nodemapper.Main;
 @SuppressWarnings ("serial")
 public class AboutDialog extends JDialog {
 
-    private final JPanel contentPanel;
-
     public AboutDialog(JFrame parent) {
 
         super(parent);
@@ -45,7 +43,7 @@ public class AboutDialog extends JDialog {
         setBounds(0, 0, 450, 150);
         setLocation(getParent().getX() + getParent().getWidth() / 2 - getWidth() / 2, getParent().getY() + getParent().getHeight() / 2 - getHeight() / 2);
 
-        contentPanel = new JPanel(new GridLayout(0, 1, 0, 0));
+        JPanel contentPanel = new JPanel(new GridLayout(0, 1, 0, 0));
         contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         getContentPane().add(contentPanel);
 

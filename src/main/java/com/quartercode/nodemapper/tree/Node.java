@@ -23,7 +23,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
-public class Node {
+public class Node implements Cloneable {
 
     private int                id         = -1;
     private String             content;

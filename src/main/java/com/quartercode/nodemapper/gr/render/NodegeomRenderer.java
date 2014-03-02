@@ -274,12 +274,12 @@ public class NodegeomRenderer implements Renderer {
                     g.setPaint(editPaint);
                     int x = contentRect.x + contentRect.width / 2 - g.getFontMetrics(contentFont).stringWidth(lines[line]) / 2;
                     int y = (int) (contentRect.y + g.getFontMetrics(contentFont).getAscent() + line * contentRect.height / lines.length * 1.1);
-                    String before = "";
+                    StringBuilder before = new StringBuilder();
                     char[] chars = lines[line].toCharArray();
                     for (int index = 0; index < node.getEditCursor() - cursor; index++) {
-                        before += chars[index];
+                        before.append(chars[index]);
                     }
-                    x += g.getFontMetrics(contentFont).stringWidth(before);
+                    x += g.getFontMetrics(contentFont).stringWidth(before.toString());
                     g.drawLine(x, y + g.getFontMetrics(contentFont).getDescent(), x, y - g.getFontMetrics(contentFont).getAscent());
                     break;
                 } else {
