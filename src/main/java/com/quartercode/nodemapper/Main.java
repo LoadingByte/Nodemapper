@@ -39,31 +39,33 @@ import com.quartercode.nodemapper.ui.FileActionUtil;
 import com.quartercode.nodemapper.ui.GeneralException;
 import com.quartercode.nodemapper.ui.LastFilesDialog;
 import com.quartercode.nodemapper.ui.MainFrame;
-import com.quartercode.nodemapper.util.OSUtil;
 
 public class Main {
 
     private static File                dir;
+    private static File                lastFilesFile;
     private static MainFrame           mainFrame;
     private static List<LastFileEntry> lastFiles = new ArrayList<LastFileEntry>();
 
     public static void main(String[] args) {
 
-        dir = new File(OSUtil.getDataDir(), ".nodemapper");
+        dir = new File(System.getProperty("user.home"), ".nodemapper");
         dir.mkdirs();
+
+        lastFilesFile = new File(dir, "last.txt");
 
         InternalReferenceSerializer.register();
         ReferenceXMLSerializer.register();
         DialogueSerializer.register();
 
         try {
-            for (Entry<File, String> entry : LastFilesSerializer.load(new File(dir, "last.txt")).entrySet()) {
+            for (Entry<File, String> entry : LastFilesSerializer.load(lastFilesFile).entrySet()) {
                 if (entry.getKey().exists()) {
                     // If the given class happens not to be a serializer class, the check afterwards will catch the error
                     @SuppressWarnings ("unchecked")
                     Class<? extends Serializer> serializer = (Class<? extends Serializer>) Class.forName(entry.getValue());
                     if (!Serializer.class.isAssignableFrom(serializer)) {
-                        // Ignore entries with wrong serializers
+                        // Ignore entries caused by invalid serializers
                         continue;
                     } else {
                         lastFiles.add(new LastFileEntry(entry.getKey(), serializer, FileActionUtil.loadTree(entry.getKey(), SerializerManager.getSerializer(serializer))));
@@ -141,7 +143,7 @@ public class Main {
             for (LastFileEntry entry : lastFiles) {
                 data.put(entry.getFile(), entry.getSerializer().getName());
             }
-            LastFilesSerializer.save(data, new File(dir, "last.txt"));
+            LastFilesSerializer.save(data, lastFilesFile);
         } catch (IOException e) {
             handle(e);
         }
@@ -156,7 +158,7 @@ public class Main {
             for (LastFileEntry entry : lastFiles) {
                 data.put(entry.getFile(), entry.getSerializer().getName());
             }
-            LastFilesSerializer.save(data, new File(dir, "last.txt"));
+            LastFilesSerializer.save(data, lastFilesFile);
         } catch (IOException e) {
             handle(e);
         }
