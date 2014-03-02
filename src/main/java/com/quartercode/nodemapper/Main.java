@@ -25,7 +25,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import com.quartercode.nodemapper.LastFilesSerializer.LastFileEntry;
 import com.quartercode.nodemapper.gr.render.DarkRenderer;
@@ -36,11 +38,12 @@ import com.quartercode.nodemapper.ser.types.InternalReferenceSerializer;
 import com.quartercode.nodemapper.ser.types.ReferenceXMLSerializer;
 import com.quartercode.nodemapper.tree.Tree;
 import com.quartercode.nodemapper.ui.FileActionUtil;
-import com.quartercode.nodemapper.ui.GeneralException;
 import com.quartercode.nodemapper.ui.LastFilesDialog;
 import com.quartercode.nodemapper.ui.MainFrame;
 
 public class Main {
+
+    private static final Logger        LOGGER    = Logger.getLogger(Main.class.getName());
 
     private static File                dir;
     private static File                lastFilesFile;
@@ -51,6 +54,16 @@ public class Main {
 
         dir = new File(System.getProperty("user.home"), ".nodemapper");
         dir.mkdirs();
+
+        // Load logging configuration
+        try {
+            LogManager.getLogManager().readConfiguration(Main.class.getResourceAsStream("/config/logging.properties"));
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Can't load logging configuration", e);
+            return;
+        }
+
+        LOGGER.info("Starting up ...");
 
         lastFilesFile = new File(dir, "last.txt");
 
@@ -72,8 +85,10 @@ public class Main {
                     }
                 }
             }
-        } catch (Exception e) {
-            handle(e);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Can't read the file storing the lastly opened files ('" + lastFilesFile.getAbsolutePath() + "')", e);
+        } catch (ClassNotFoundException e) {
+            LOGGER.log(Level.SEVERE, "Unknown serializer: " + e.getMessage(), e);
         }
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -87,6 +102,8 @@ public class Main {
                 new LastFilesDialog(mainFrame).setVisible(true);
             }
         });
+
+        LOGGER.info("Successfully started up");
     }
 
     public static String getTitle() {
@@ -145,7 +162,7 @@ public class Main {
             }
             LastFilesSerializer.save(data, lastFilesFile);
         } catch (IOException e) {
-            handle(e);
+            LOGGER.log(Level.SEVERE, "Can't write the file storing the lastly opened files ('" + lastFilesFile.getAbsolutePath() + "')", e);
         }
     }
 
@@ -160,19 +177,7 @@ public class Main {
             }
             LastFilesSerializer.save(data, lastFilesFile);
         } catch (IOException e) {
-            handle(e);
-        }
-    }
-
-    public static void handle(Throwable t) {
-
-        if (! (t instanceof GeneralException)) {
-            System.err.println("An error occurred:");
-            t.printStackTrace();
-        }
-
-        if (mainFrame != null) {
-            JOptionPane.showMessageDialog(mainFrame, "An error occurred:\n" + t + (t instanceof GeneralException ? "\nLook at the console for more information." : ""), "Error", JOptionPane.ERROR_MESSAGE);
+            LOGGER.log(Level.SEVERE, "Can't write the file storing the lastly opened files ('" + lastFilesFile.getAbsolutePath() + "')", e);
         }
     }
 

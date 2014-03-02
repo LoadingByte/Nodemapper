@@ -27,6 +27,8 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
@@ -49,14 +51,16 @@ import com.quartercode.nodemapper.tree.TreeUtil;
 @SuppressWarnings ("serial")
 public class MainFrame extends JFrame {
 
-    private Action          saveAction;
-    private Action          saveAsAction;
-    private Action          exportAsAction;
-    private Action          renameAction;
-    private final NodePanel nodePanel;
+    private static final Logger LOGGER = Logger.getLogger(MainFrame.class.getName());
 
-    private File            currentFile;
-    private File            lastDirectory;
+    private Action              saveAction;
+    private Action              saveAsAction;
+    private Action              exportAsAction;
+    private Action              renameAction;
+    private final NodePanel     nodePanel;
+
+    private File                currentFile;
+    private File                lastDirectory;
 
     public MainFrame() {
 
@@ -396,12 +400,12 @@ public class MainFrame extends JFrame {
                 Main.addLastFile(file, serializer, nodePanel.getTree());
             }
         } catch (IOException e) {
-            Main.handle(e);
+            LOGGER.log(Level.SEVERE, "Can't serialize tree to '" + file.getAbsolutePath() + "'", e);
         } finally {
             try {
                 output.close();
             } catch (IOException e) {
-                Main.handle(e);
+                LOGGER.log(Level.SEVERE, "Can't close output (file '" + file.getAbsolutePath() + "')", e);
             }
         }
     }

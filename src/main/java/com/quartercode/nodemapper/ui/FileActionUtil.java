@@ -20,10 +20,11 @@ package com.quartercode.nodemapper.ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import com.quartercode.nodemapper.Main;
 import com.quartercode.nodemapper.ser.FileInput;
 import com.quartercode.nodemapper.ser.Input;
 import com.quartercode.nodemapper.ser.Serializer;
@@ -31,18 +32,20 @@ import com.quartercode.nodemapper.tree.Tree;
 
 public class FileActionUtil {
 
+    private static final Logger LOGGER = Logger.getLogger(FileActionUtil.class.getName());
+
     public static Tree loadTree(File file, Serializer serializer) {
 
         Input input = new FileInput(file);
         try {
             return serializer.deserialize(input);
-        } catch (IOException e1) {
-            Main.handle(e1);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Can't deserialize tree from '" + file.getAbsolutePath() + "'", e);
         } finally {
             try {
                 input.close();
-            } catch (IOException e1) {
-                Main.handle(e1);
+            } catch (IOException e) {
+                LOGGER.log(Level.SEVERE, "Can't close input (file '" + file.getAbsolutePath() + "')", e);
             }
         }
 
