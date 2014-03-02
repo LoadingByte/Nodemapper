@@ -31,6 +31,8 @@ import com.quartercode.nodemapper.tree.Tree;
 
 public class LastFilesSerializer {
 
+    private static final String SEPERATOR = ":::";
+
     public static class LastFileEntry {
 
         private final File                        file;
@@ -71,7 +73,7 @@ public class LastFilesSerializer {
         PrintWriter writer = new PrintWriter(file);
 
         for (Entry<File, String> entry : lastFiles.entrySet()) {
-            writer.println(entry.getKey().getAbsolutePath() + ";;;" + entry.getValue());
+            writer.println(entry.getKey().getAbsolutePath() + SEPERATOR + entry.getValue());
         }
 
         writer.flush();
@@ -88,7 +90,7 @@ public class LastFilesSerializer {
             String line = "";
             while ( (line = reader.readLine()) != null) {
                 if (!line.trim().isEmpty()) {
-                    String[] parts = line.split(";;;");
+                    String[] parts = line.split(SEPERATOR);
                     lastFiles.put(new File(parts[0]), parts[1]);
                 }
             }
