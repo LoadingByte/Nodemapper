@@ -1,3 +1,9 @@
+1.3.0
+-----
+
+### Notes
+* Nodemapper is now using the version 1.7 of Java.
+
 1.2.0
 -----
 
