@@ -27,8 +27,8 @@ import javax.swing.filechooser.FileFilter;
 
 public class SerializerManager {
 
-    private static List<Serializer>            serializers = new ArrayList<Serializer>();
-    private static Map<Serializer, FileFilter> fileFilters = new HashMap<Serializer, FileFilter>();
+    private static List<Serializer>            serializers = new ArrayList<>();
+    private static Map<Serializer, FileFilter> fileFilters = new HashMap<>();
 
     public static List<Serializer> getSerializers() {
 
@@ -37,7 +37,7 @@ public class SerializerManager {
 
     public static List<Serializer> getSerializers(boolean internal) {
 
-        List<Serializer> serializers = new ArrayList<Serializer>();
+        List<Serializer> serializers = new ArrayList<>();
         for (Serializer serializer : SerializerManager.serializers) {
             if (internal == serializer.getClass().isAnnotationPresent(InternalSerializer.class)) {
                 serializers.add(serializer);

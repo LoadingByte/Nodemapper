@@ -44,8 +44,8 @@ import com.quartercode.nodemapper.tree.Tree;
 @SuppressWarnings ("serial")
 public class LastFilesDialog extends JDialog {
 
-    private final JList            lastFilesList;
-    private final DefaultListModel lastFilesModel;
+    private final JList<LastFileEntry>            lastFilesList;
+    private final DefaultListModel<LastFileEntry> lastFilesModel;
 
     public LastFilesDialog(final MainFrame parent) {
 
@@ -68,7 +68,7 @@ public class LastFilesDialog extends JDialog {
         versionLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
         lastFilesPanel.add(versionLabel, BorderLayout.NORTH);
 
-        lastFilesList = new JList();
+        lastFilesList = new JList<>();
         lastFilesList.setFont(new Font("Tahoma", Font.PLAIN, 12));
         lastFilesList.addListSelectionListener(new ListSelectionListener() {
 
@@ -76,9 +76,9 @@ public class LastFilesDialog extends JDialog {
             public void valueChanged(ListSelectionEvent e) {
 
                 if (lastFilesList.getSelectedValue() instanceof LastFileEntry) {
-                    File file = ((LastFileEntry) lastFilesList.getSelectedValue()).getFile();
-                    Serializer serializer = SerializerManager.getSerializer( ((LastFileEntry) lastFilesList.getSelectedValue()).getSerializer());
-                    Tree tree = ((LastFileEntry) lastFilesList.getSelectedValue()).getTree();
+                    File file = lastFilesList.getSelectedValue().getFile();
+                    Serializer serializer = SerializerManager.getSerializer(lastFilesList.getSelectedValue().getSerializer());
+                    Tree tree = lastFilesList.getSelectedValue().getTree();
                     parent.openTree(file, serializer, tree);
                     dispose();
                 }
@@ -86,7 +86,7 @@ public class LastFilesDialog extends JDialog {
         });
         lastFilesPanel.add(lastFilesList, BorderLayout.CENTER);
 
-        lastFilesModel = new DefaultListModel();
+        lastFilesModel = new DefaultListModel<>();
         lastFilesList.setModel(lastFilesModel);
         refreshList();
 
@@ -118,10 +118,6 @@ public class LastFilesDialog extends JDialog {
 
         for (int counter = Main.getLastFiles().size() - 1; counter >= 0; counter--) {
             lastFilesModel.addElement(Main.getLastFiles().get(counter));
-        }
-
-        if (lastFilesModel.isEmpty()) {
-            lastFilesModel.addElement("No recent Maps");
         }
     }
 

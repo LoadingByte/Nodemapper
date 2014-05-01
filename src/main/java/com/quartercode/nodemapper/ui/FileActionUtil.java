@@ -36,17 +36,10 @@ public class FileActionUtil {
 
     public static Tree loadTree(File file, Serializer serializer) {
 
-        Input input = new FileInput(file);
-        try {
+        try (Input input = new FileInput(file)) {
             return serializer.deserialize(input);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Can't deserialize tree from '" + file.getAbsolutePath() + "'", e);
-        } finally {
-            try {
-                input.close();
-            } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Can't close input (file '" + file.getAbsolutePath() + "')", e);
-            }
         }
 
         return null;

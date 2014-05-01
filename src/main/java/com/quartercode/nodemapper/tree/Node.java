@@ -27,8 +27,8 @@ public class Node implements Cloneable {
 
     private int                id         = -1;
     private String             content;
-    private List<NodeProperty> properties = new ArrayList<NodeProperty>();
-    private List<Node>         children   = new ArrayList<Node>();
+    private List<NodeProperty> properties = new ArrayList<>();
+    private List<Node>         children   = new ArrayList<>();
 
     public Node() {
 

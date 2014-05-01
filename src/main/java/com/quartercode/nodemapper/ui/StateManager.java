@@ -24,9 +24,9 @@ import com.quartercode.nodemapper.tree.Tree;
 
 public class StateManager {
 
-    private final List<Runnable> listeners = new ArrayList<Runnable>();
+    private final List<Runnable> listeners = new ArrayList<>();
 
-    private final List<Tree>     states    = new ArrayList<Tree>();
+    private final List<Tree>     states    = new ArrayList<>();
     private int                  index     = -1;
 
     public StateManager() {

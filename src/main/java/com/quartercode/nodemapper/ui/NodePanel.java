@@ -49,7 +49,7 @@ public class NodePanel extends JPanel {
     private boolean              changed;
 
     private Point                viewPoint;
-    private final List<Runnable> changeListeners = new ArrayList<Runnable>();
+    private final List<Runnable> changeListeners = new ArrayList<>();
 
     private RenderNode           dragNode;
     private boolean              dragNodeDragged;

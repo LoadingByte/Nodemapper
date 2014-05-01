@@ -28,7 +28,7 @@ import java.util.Map;
 public class FileOutput implements Output {
 
     private final File                    file;
-    private final Map<File, OutputStream> streams = new HashMap<File, OutputStream>();
+    private final Map<File, OutputStream> streams = new HashMap<>();
 
     public FileOutput(File file) {
 

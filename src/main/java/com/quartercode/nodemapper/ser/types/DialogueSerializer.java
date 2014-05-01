@@ -50,8 +50,8 @@ public class DialogueSerializer extends ReferenceSerializer {
     @Override
     public void serialize(Tree tree, Output output) throws IOException {
 
-        Map<Integer, String> contents = new TreeMap<Integer, String>();
-        Map<String, DialogueCharacter> characters = new HashMap<String, DialogueCharacter>();
+        Map<Integer, String> contents = new TreeMap<>();
+        Map<String, DialogueCharacter> characters = new HashMap<>();
         for (Node node : tree.getNodes()) {
             node.removeProperty(node.getProperty("x"));
             node.removeProperty(node.getProperty("y"));
@@ -76,11 +76,11 @@ public class DialogueSerializer extends ReferenceSerializer {
 
         super.serialize(tree, output);
 
-        PrintStream valueOutput = new PrintStream(output.getOutputStream("_values.lang", false));
-        for (Entry<Integer, String> entry : contents.entrySet()) {
-            valueOutput.println(entry.getKey() + "=" + entry.getValue().replaceAll("\\\\", " "));
+        try (PrintStream valueOutput = new PrintStream(output.getOutputStream("_values.lang", false))) {
+            for (Entry<Integer, String> entry : contents.entrySet()) {
+                valueOutput.println(entry.getKey() + "=" + entry.getValue().replaceAll("\\\\", " "));
+            }
         }
-        valueOutput.close();
 
         DialogueCharacterSet characterSet = new DialogueCharacterSet();
         characterSet.setCharacters(characters.values().toArray(new DialogueCharacter[characters.values().size()]));

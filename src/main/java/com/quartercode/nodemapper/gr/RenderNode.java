@@ -64,7 +64,7 @@ public class RenderNode {
 
     public String[] getContentLines() {
 
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList<>();
         char[] chars = getContent().toCharArray();
         String line = "";
         for (char c : chars) {

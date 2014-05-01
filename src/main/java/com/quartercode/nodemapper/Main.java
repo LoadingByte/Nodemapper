@@ -48,7 +48,7 @@ public class Main {
     private static File                dir;
     private static File                lastFilesFile;
     private static MainFrame           mainFrame;
-    private static List<LastFileEntry> lastFiles = new ArrayList<LastFileEntry>();
+    private static List<LastFileEntry> lastFiles = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -134,7 +134,7 @@ public class Main {
     public static void addLastFile(File file, Serializer serializer, Tree tree) {
 
         if (lastFiles.size() >= 10) {
-            List<LastFileEntry> newLastFiles = new ArrayList<LastFileEntry>();
+            List<LastFileEntry> newLastFiles = new ArrayList<>();
             int counter = 0;
             for (LastFileEntry entry : lastFiles) {
                 newLastFiles.add(entry);
@@ -147,7 +147,7 @@ public class Main {
             lastFiles = newLastFiles;
         }
 
-        for (LastFileEntry entry : new ArrayList<LastFileEntry>(lastFiles)) {
+        for (LastFileEntry entry : new ArrayList<>(lastFiles)) {
             if (entry.getFile().equals(file)) {
                 lastFiles.remove(entry);
             }
@@ -156,7 +156,7 @@ public class Main {
         lastFiles.add(new LastFileEntry(file, serializer.getClass(), tree));
 
         try {
-            Map<File, String> data = new LinkedHashMap<File, String>();
+            Map<File, String> data = new LinkedHashMap<>();
             for (LastFileEntry entry : lastFiles) {
                 data.put(entry.getFile(), entry.getSerializer().getName());
             }
@@ -171,7 +171,7 @@ public class Main {
         lastFiles.clear();
 
         try {
-            Map<File, String> data = new LinkedHashMap<File, String>();
+            Map<File, String> data = new LinkedHashMap<>();
             for (LastFileEntry entry : lastFiles) {
                 data.put(entry.getFile(), entry.getSerializer().getName());
             }

@@ -70,32 +70,27 @@ public class LastFilesSerializer {
 
     public static void save(Map<File, String> lastFiles, File file) throws IOException {
 
-        PrintWriter writer = new PrintWriter(file);
-
-        for (Entry<File, String> entry : lastFiles.entrySet()) {
-            writer.println(entry.getKey().getAbsolutePath() + SEPERATOR + entry.getValue());
+        try (PrintWriter writer = new PrintWriter(file)) {
+            for (Entry<File, String> entry : lastFiles.entrySet()) {
+                writer.println(entry.getKey().getAbsolutePath() + SEPERATOR + entry.getValue());
+            }
         }
-
-        writer.flush();
-        writer.close();
     }
 
     public static Map<File, String> load(File file) throws IOException {
 
-        Map<File, String> lastFiles = new LinkedHashMap<File, String>();
+        Map<File, String> lastFiles = new LinkedHashMap<>();
 
         if (file.exists()) {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-
-            String line = "";
-            while ( (line = reader.readLine()) != null) {
-                if (!line.trim().isEmpty()) {
-                    String[] parts = line.split(SEPERATOR);
-                    lastFiles.put(new File(parts[0]), parts[1]);
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line = "";
+                while ( (line = reader.readLine()) != null) {
+                    if (!line.trim().isEmpty()) {
+                        String[] parts = line.split(SEPERATOR);
+                        lastFiles.put(new File(parts[0]), parts[1]);
+                    }
                 }
             }
-
-            reader.close();
         }
 
         return lastFiles;

@@ -37,7 +37,7 @@ import com.quartercode.nodemapper.tree.TreeUtil;
 public class ReferenceTree implements SerializationTree {
 
     private String              name;
-    private List<ReferenceNode> nodes = new ArrayList<ReferenceNode>();
+    private List<ReferenceNode> nodes = new ArrayList<>();
 
     public ReferenceTree() {
 
@@ -88,7 +88,7 @@ public class ReferenceTree implements SerializationTree {
             referenceNode.setContent(node.getContent());
             referenceNode.setProperties(node.getProperties());
 
-            List<ReferenceChildDefinition> referenceChildren = new ArrayList<ReferenceChildDefinition>();
+            List<ReferenceChildDefinition> referenceChildren = new ArrayList<>();
             for (Node child : node.getChildren()) {
                 referenceChildren.add(new ReferenceChildDefinition(child.getId()));
             }
@@ -120,7 +120,7 @@ public class ReferenceTree implements SerializationTree {
     @XmlType (propOrder = { "content", "properties", "referenceChildren" })
     static class ReferenceNode extends Node {
 
-        private List<ReferenceChildDefinition> referenceChildren = new ArrayList<ReferenceChildDefinition>();
+        private List<ReferenceChildDefinition> referenceChildren = new ArrayList<>();
 
         public ReferenceNode() {
 

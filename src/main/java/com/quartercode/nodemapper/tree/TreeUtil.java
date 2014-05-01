@@ -51,7 +51,7 @@ public class TreeUtil {
     public static void cleanupNodes(Tree tree) {
 
         int id = 1;
-        List<Node> nodes = new ArrayList<Node>(tree.getNodes());
+        List<Node> nodes = new ArrayList<>(tree.getNodes());
         nodes.remove(tree.getRoot());
         for (Node node : nodes) {
             node.setId(id);

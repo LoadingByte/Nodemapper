@@ -28,7 +28,7 @@ import java.util.Map;
 public class FileInput implements Input {
 
     private final File                   file;
-    private final Map<File, InputStream> streams = new HashMap<File, InputStream>();
+    private final Map<File, InputStream> streams = new HashMap<>();
 
     public FileInput(File file) {
 

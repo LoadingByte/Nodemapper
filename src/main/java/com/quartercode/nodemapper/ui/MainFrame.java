@@ -390,8 +390,7 @@ public class MainFrame extends JFrame {
 
     private void saveTo(File file, Serializer serializer) {
 
-        Output output = new FileOutput(file);
-        try {
+        try (Output output = new FileOutput(file)) {
             TreeUtil.cleanupNodes(nodePanel.getTree());
             serializer.serialize(nodePanel.getTree().clone(), output);
             nodePanel.setChanged(false);
@@ -401,12 +400,6 @@ public class MainFrame extends JFrame {
             }
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Can't serialize tree to '" + file.getAbsolutePath() + "'", e);
-        } finally {
-            try {
-                output.close();
-            } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Can't close output (file '" + file.getAbsolutePath() + "')", e);
-            }
         }
     }
 

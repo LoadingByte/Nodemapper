@@ -27,7 +27,7 @@ import java.util.Map.Entry;
 public class Tree implements Cloneable {
 
     private String           name;
-    private final List<Node> nodes = new ArrayList<Node>();
+    private final List<Node> nodes = new ArrayList<>();
 
     public Tree() {
 
@@ -84,7 +84,7 @@ public class Tree implements Cloneable {
 
         Tree clone = new Tree(getName());
 
-        Map<Node, Node> clonedNodes = new HashMap<Node, Node>();
+        Map<Node, Node> clonedNodes = new HashMap<>();
         for (Node node : nodes) {
             Node clonedNode = node.clone();
             clonedNodes.put(node, clonedNode);
