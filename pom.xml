@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>Nodemapper</name>
-    <url>http://maven.apache.org</url>
+    <url>http://www.quartercode.com</url>
     <description>Nodemapper is a 2D tree mapping application.</description>
     <inceptionYear>2013</inceptionYear>
 
