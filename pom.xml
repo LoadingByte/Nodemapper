@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>Nodemapper</name>
-    <url>http://www.quartercode.com</url>
+    <url>http://quartercode.com/wiki/Nodemapper</url>
     <description>Nodemapper is a 2D tree mapping application.</description>
     <inceptionYear>2013</inceptionYear>
 
@@ -19,7 +19,7 @@
 
     <organization>
         <name>QuarterCode</name>
-        <url>http://www.quartercode.com</url>
+        <url>http://quartercode.com</url>
     </organization>
 
     <developers>

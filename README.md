@@ -1,14 +1,15 @@
 Nodemapper
 ==========
 
-![Nodemapper Screenshot](https://raw.github.com/QuarterCode/Nodemapper/master/doc/screenshots/screenshot1.png)
+![Nodemapper Screenshot](http://quartercode.com/w/images/4/4e/Nodemapper_Screenshot.png)
 
 Nodemapper is a 2D tree mapping application. It's a powerful tool for creating trees using a GUI software.
+More information can be found on the [wiki page](http://quartercode.com/wiki/Nodemapper).
 
 License
 -------
 
-Copyright (c) 2013 QuarterCode <http://www.quartercode.com/>
+Copyright (c) 2013 QuarterCode <http://quartercode.com/>
 
 Nodemapper may be used under the terms of the GNU General Public License (GPL) v3.0. See the LICENSE.md file or https://www.gnu.org/licenses/gpl-3.0.txt for details.
 
@@ -35,18 +36,3 @@ If you downloaded a binaries package or built your own one, you have several opt
         $ java -jar nodemapper-<version>.jar
 
 You need the Java JRE for each of those methods. If you haven't done yet, download it [here](www.java.com/download).
-
-Usage
------
-
-If you start a new tree, you will only have one node with the content "Root". You can double-click on the text to edit it to something else.
-
-You can add a new link to another node by clicking on the border of a node and dragging the line to the other node. If there's no node, the program will create a new one. If you link to nodes together a second time, the link will be removed.
-
-Use trees with your software
-----------------------------
-
-If you want to use created trees in your own software, you can copy the source files from the package "com.quartercode.nodemapper.tree" and use them as an API.
-For loading/saving, you need the packages "com.quartercode.nodemapper.ser" and "com.quartercode.nodemapper.ser.types".
-
-The only requirement for using this classes is a reference to this original repository.

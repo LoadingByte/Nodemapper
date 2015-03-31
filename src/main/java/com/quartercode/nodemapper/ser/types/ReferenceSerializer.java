@@ -1,6 +1,6 @@
 /*
  * This file is part of Nodemapper.
- * Copyright (c) 2013 QuarterCode <http://www.quartercode.com/>
+ * Copyright (c) 2013 QuarterCode <http://quartercode.com/>
  *
  * Nodemapper is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
