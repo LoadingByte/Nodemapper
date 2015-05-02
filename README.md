@@ -16,10 +16,11 @@ Nodemapper may be used under the terms of the GNU General Public License (GPL) v
 Compilation
 -----------
 
-We use maven to handle our dependencies and build. To compile Nodemapper, follow these steps:
+We use maven to handle our dependencies and build, so you need the Java JDK and Maven for compiling the sourcecode.
 
-* Install [Maven 3](http://maven.apache.org/download.html).
+* Download & install [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* Download & install [Maven 3](http://maven.apache.org/download.cgi).
 * Check out this repository (clone or download).
 * Navigate to the project folder of this repository which contains a `pom.xml` and run:
 
-        $ mvn clean install
+        mvn clean install
